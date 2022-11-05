@@ -14,45 +14,44 @@ public class Data {
     }
 
     public static boolean checkLogin(String login) throws WrongLoginException {
-        if (login.length() <= 20 && login.length() >= 1) {
-            for (int i = 0; i < login.length(); i++) {
-                if (loginChars.indexOf(login.toLowerCase().charAt(i)) != -1) {
-                } else {
-                    throw new WrongLoginException("Неверный логин");
-                }
-            }
+        if (checkLength(login)) {
+           checkSymbolLogin(login);
+            return true; } else {
+        return false;}}
 
-        } else {
-            throw new WrongLoginException("Число символов должно быть в диапазоне 1-20");
-        } return true;
-    }
+
 
     public static boolean checkPassword(String password, String confirmPassword) throws WrongPasswordException {
-        if (password.length() <= 20 && password.length() >= 1) {
-            for (int i = 0; i < password.length(); i++) {
-                if (loginChars.indexOf(password.toLowerCase().charAt(i)) != -1) {
-                } else {
-                    throw new WrongPasswordException("Неверный пароль");
-                }
-
+        if (checkLength(password)) {
+            checkSymbolPass(password);
             }
-
-        } else {
-            throw new WrongPasswordException("Число символов поля пароль должно быть 1-20");
-        }
-        if (confirmPassword.length() <= 20 && confirmPassword.length() >= 1) {
-            for (int i = 0; i < confirmPassword.length(); i++) {
-                if (loginChars.indexOf(confirmPassword.toLowerCase().charAt(i)) != -1) {
-                } else {
-                    throw new WrongPasswordException("Неверное подтверждение пароля");
-                }
-            }
-
-        } else {
-            throw new WrongPasswordException("Число символов поля пароль должно быть 1-20");
-        }
         if (!password.equals(confirmPassword)){
             throw new WrongPasswordException("Пароли не совпадают");
         } return true;
     }
-}
+    public static boolean checkLength(String str){
+        if(str.length() <= 20 && str.length() >= 1){
+            return true;
+        }else {return false;}}
+
+
+        public static void checkSymbolLogin(String str) throws WrongLoginException{
+            for (int i = 0; i < str.length(); i++) {
+                if (loginChars.indexOf(str.toLowerCase().charAt(i)) != -1) {
+                } else {
+                    throw new WrongLoginException("Неверный логин");
+                }
+
+            }
+        }
+
+    public static void checkSymbolPass(String str) throws WrongPasswordException{
+        for (int i = 0; i < str.length(); i++) {
+            if (loginChars.indexOf(str.toLowerCase().charAt(i)) != -1) {
+            } else {
+                throw new WrongPasswordException("Неверный пароль");
+            }
+
+        }
+    }
+    }
